@@ -4,10 +4,28 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast"; 
 import { useCart } from "@/context/cart-context";
 import { Product } from "@/lib/types";
 import Link from "next/link";
+
+export async function generateStaticParams() {
+  try {
+    const response = await fetch("https://api.escuelajs.co/api/v1/products");
+    const data = await response.json();
+
+    return data.map((product: Product) => ({
+      id: String(product.id),
+    }));
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
+
+interface Props {
+  params: { id: string };
+}
 
 export default function ProductPage() {
   const params = useParams();
@@ -19,9 +37,8 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(
-          `https://api.escuelajs.co/api/v1/products/${params.id}`
-        );
+        const response = await fetch(`https://api.escuelajs.co/api/v1/products/${params.id}`);
+
         const data = await response.json();
         setProduct(data);
       } catch (error) {
