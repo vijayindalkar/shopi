@@ -47,7 +47,7 @@ export default function Home() {
       const uniqueCategories = Array.from(
         new Set(data.map((product: Product) => product.category.name))
       );
-      setCategories(uniqueCategories);
+      setCategories(Array.from(new Set(data.map((product: Product) => product.category.name as string))));
     };
 
     fetchProducts();
