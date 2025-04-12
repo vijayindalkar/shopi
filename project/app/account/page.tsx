@@ -32,7 +32,7 @@ export default function AccountPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle profile update here
+   
     console.log("Updating profile:", profile);
   };
 

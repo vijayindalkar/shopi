@@ -36,7 +36,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { addItem, removeItem, updateQuantity, items, itemCount, total } = useCart();
   const { toast } = useToast();
-  const userEmail = "userintheapp@test.com"; // This would come from your auth system
+  const userEmail = "userintheapp@test.com"; 
 
   useEffect(() => {
     const fetchProducts = async () => {

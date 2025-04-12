@@ -1,7 +1,6 @@
 import { Product } from "@/lib/types";
 import ProductClient from "./ProductClient";
 
-// ✅ Generates static paths for product pages
 export async function generateStaticParams() {
   try {
     const res = await fetch("https://api.escuelajs.co/api/v1/products");
@@ -20,7 +19,6 @@ interface PageProps {
   params: { id: string };
 }
 
-// ✅ Fetch product data at build time (Server-side)
 export default async function ProductPage({ params }: PageProps) {
   try {
     const res = await fetch(`https://api.escuelajs.co/api/v1/products/${params.id}`);
